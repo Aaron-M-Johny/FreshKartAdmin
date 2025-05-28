@@ -11,10 +11,6 @@ type FormState = {
   message: string;
 };
 
-const initialState: FormState = {
-  success: false,
-  message: "",
-};
 
 const AddProductForm = () => {
   const [preview, setPreview] = useState<boolean>(false);

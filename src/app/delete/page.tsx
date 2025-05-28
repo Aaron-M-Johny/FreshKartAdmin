@@ -45,28 +45,30 @@ const EditStock = () => {
     }));
   };
 
-  const handleDelete = async () => {
-    setIsSubmitting(true);
-    const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
-      .filter(([_, isDelete]) => isDelete === true)
-      .map(([ProductId]) => Number(ProductId));
+const handleDelete = async () => {
+  setIsSubmitting(true);
 
-    try {
-      const res = await axios.post("/api/delete", productIdsToDelete);
-      toast.success(res.data.message);
-      setRerender(!rerender);
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        toast.error(err.response?.data || err.message);
-      } else if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("An unknown error occurred.");
-      }
-    } finally {
-      setIsSubmitting(false);
+  const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
+    .filter(([_, isDelete]) => isDelete === true)
+    .map(([productId]) => Number(productId));
+
+  try {
+    const res = await axios.post("/api/delete", productIdsToDelete);
+    toast.success(res.data.message);
+    setRerender(!rerender);
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      toast.error(err.response?.data || err.message);
+    } else if (err instanceof Error) {
+      toast.error(err.message);
+    } else {
+      toast.error("An unknown error occurred.");
     }
-  };
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   useEffect(() => {
     if (!selectedSubCategory) return;

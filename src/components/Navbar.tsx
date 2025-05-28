@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -12,7 +13,7 @@ const AdminNavbar = () => {
         {/* Logo & Title */}
         <Link href="/dashboard">
           <div className="flex items-center space-x-3">
-            <img src="/logo/FreshKart-logo.png" alt="FreshKart Logo" className="h-12" />
+            <Image height={50} width={50} src="/logo/FreshKart-logo.png" alt="FreshKart Logo" className="h-12" />
             <h2 className="text-3xl font-semibold">FreshKart</h2>
           </div>
         </Link>

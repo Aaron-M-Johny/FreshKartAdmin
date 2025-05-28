@@ -1,5 +1,5 @@
 // app/layout.tsx
-import "./globals.css"; // if you're using global styles
+import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import AdminNavbar from "@/components/Navbar";
 import { Metadata } from "next";
