@@ -1,8 +1,9 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const productIds: number[] = await req.json();
+
+  const { prisma } = await import("@/lib/prisma"); // lazy import
 
   try {
     await Promise.all(

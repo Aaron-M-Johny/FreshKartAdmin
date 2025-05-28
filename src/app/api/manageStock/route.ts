@@ -1,9 +1,8 @@
 import { productStockListInterface } from "@/interfaces/admin/interfaces";
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-
 export async function POST(req: Request) {
+  const { prisma } = await import("@/lib/prisma"); // lazy import inside handler
   const data: productStockListInterface[] = await req.json();
 
   try {

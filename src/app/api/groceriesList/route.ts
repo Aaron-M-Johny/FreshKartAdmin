@@ -1,7 +1,8 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
+  const { prisma } = await import("@/lib/prisma"); // lazy import
+
   const url = new URL(req.url);
   const subCategory = url.searchParams.get("subcategory");
 
@@ -29,5 +30,6 @@ export async function GET(req: Request) {
       Quantity: true,
     },
   });
+
   return NextResponse.json({ status: "ok", data: groceries });
 }
