@@ -13,9 +13,7 @@ const Dashboard = () => {
       const res=await axios.get("/api/dashboard/totalProducts")
       setTotalProducts(res.data.data)
     }
-    fetchAPI()
-    console.log(totalProducts)
-  
+    fetchAPI()  
   }, [])
   
   return (

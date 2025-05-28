@@ -6,11 +6,6 @@ import Categories from "@/components/Categories";
 import NextImage from "next/image";
 import { InputField } from "@/components/InputField";
 
-type FormState = {
-  success: boolean;
-  message: string;
-};
-
 
 const AddProductForm = () => {
   const [preview, setPreview] = useState<boolean>(false);

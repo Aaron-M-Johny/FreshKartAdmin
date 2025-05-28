@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 declare class AnyNull extends NullTypesEnumValue {
     #private;
 }
