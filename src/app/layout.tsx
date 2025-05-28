@@ -2,10 +2,18 @@
 import "./globals.css"; // if you're using global styles
 import { Toaster } from "react-hot-toast";
 import AdminNavbar from "@/components/Navbar";
+import { Metadata } from "next";
 
-export const metadata = {
-  title: "Freshkart Admin",
-  description: "Admin panel for Freshkart",
+export const metadata: Metadata = {
+  title: "FreshKart Admin",
+  description: "Manage FreshKart",
+  icons: {
+    icon: [
+      { url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/icon/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
