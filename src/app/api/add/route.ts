@@ -1,14 +1,13 @@
-import { prisma } from "@/lib/prisma";
-import { getNextProductId } from "@/lib/productIdGenerator"; // adjust the path if needed
-
 export async function POST(req: Request) {
+  // Lazy import inside the function — delays import until runtime, avoids build errors
+  const { prisma } = await import("@/lib/prisma");
+  const { getNextProductId } = await import("@/lib/productIdGenerator");
+
   const formData = await req.json();
 
   try {
-    // Generate next product ID
     const nextProductId = await getNextProductId();
 
-    // Insert product with the generated ProductId
     await prisma.grocery.create({
       data: {
         ...formData,
@@ -16,7 +15,7 @@ export async function POST(req: Request) {
         Stock: parseInt(formData.Stock, 10),
         Price: parseFloat(formData.Price),
         DiscountPrice: parseFloat(formData.DiscountPrice),
-      }
+      },
     });
 
     return new Response(
