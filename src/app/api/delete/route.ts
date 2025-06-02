@@ -1,27 +1,27 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
-  const productIds: number[] = await req.json();
+  // const productIds: number[] = await req.json();
 
-  const { prisma } = await import("@/lib/prisma"); // lazy import
+  // const { prisma } = await import("@/lib/prisma");
 
-  try {
-    await Promise.all(
-      productIds.map((ProductId) =>
-        prisma.grocery.delete({
-          where: { ProductId },
-        })
-      )
-    );
+  // try {
+  //   await Promise.all(
+  //     productIds.map((ProductId) =>
+  //       prisma.grocery.delete({
+  //         where: { ProductId },
+  //       })
+  //     )
+  //   );
 
-    console.log(productIds);
+  //   console.log(productIds);
 
-    return NextResponse.json({ status: "success", message: "Deleted!" });
-  } catch (error) {
-    console.error(error);
+  //   return NextResponse.json({ status: "success", message: "Deleted!" });
+  // } catch (error) {
+  //   console.error(error);
     return NextResponse.json(
-      { status: "error", message: "Failed to Delete." },
+      { status: "error", message: "Delete disabled by Admin" },
       { status: 500 }
     );
-  }
+  // }
 }

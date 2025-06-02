@@ -1,4 +1,4 @@
-import { SelectFieldProps } from "@/interfaces/admin/interfaces";
+import { SelectFieldProps } from "@/interfaces/interfaces";
 
 export const SelectField: React.FC<SelectFieldProps> = ({
   id,

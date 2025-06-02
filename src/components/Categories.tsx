@@ -29,6 +29,8 @@ const Categories = () => {
     ? selectedCategoryObj.subCategories
     : [];
 
+  console.log("subCategories:", subCategories);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <SelectField
@@ -52,9 +54,9 @@ const Categories = () => {
         onChange={handleSubCategoryChange}
         options={
           selectedCategory
-            ? subCategories.map((item) => ({
-                label: item.subCategory,
-                value: item.subCategory,
+            ? subCategories.map((subCat) => ({
+                label: subCat,
+                value: subCat,
               }))
             : []
         }
@@ -67,6 +69,3 @@ const Categories = () => {
 };
 
 export default Categories;
-
-
-

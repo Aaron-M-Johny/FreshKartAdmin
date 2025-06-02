@@ -1,5 +1,4 @@
 export async function POST(req: Request) {
-  // Lazy import inside the function — delays import until runtime, avoids build errors
   const { prisma } = await import("@/lib/prisma");
   const { getNextProductId } = await import("@/lib/productIdGenerator");
 

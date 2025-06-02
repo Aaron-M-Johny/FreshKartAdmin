@@ -1,6 +1,6 @@
 "use client"
-import DonutChart from "@/components/DonutChart";
-import FewStock from "@/components/FewStockTable";
+import DonutChart from "@/components/DashBoard/DonutChart";
+import FewStock from "@/components/DashBoard/FewStockTable";
 import RecentOrderTable from "@/components/RecentOrderTable";
 import axios from "axios";
 import { useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 "use client"
 
-import { GroceryInterface } from "@/interfaces/admin/interfaces"
+import { GroceryInterface } from "@/interfaces/interfaces"
 import axios from "axios"
 import { useEffect, useState } from "react"
 

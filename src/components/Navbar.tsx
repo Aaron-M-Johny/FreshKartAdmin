@@ -12,10 +12,13 @@ const AdminNavbar = () => {
       <nav className="max-w-[1500px] mx-auto w-[90%] pl-10 h-full flex items-center justify-between">
         {/* Logo & Title */}
         <Link href="/dashboard">
-          <div className="flex items-center space-x-3">
-            <Image height={50} width={50} src="/logo/FreshKart-logo.png" alt="FreshKart Logo" className="h-12" />
-            <h2 className="text-3xl font-semibold">FreshKart</h2>
-          </div>
+            <Image
+              width="200"
+              height="75"
+              alt="Logo"
+              src="/logo/logo.png"
+              priority
+            />
         </Link>
 
         {/* Navigation Menu */}

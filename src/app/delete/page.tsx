@@ -7,11 +7,11 @@ import Image from "next/image";
 import {
   GroceryInterface,
   productDeleteObjectInterface,
-} from "@/interfaces/admin/interfaces";
+} from "@/interfaces/interfaces";
 import toast from "react-hot-toast";
 import { SelectField } from "@/components/SelectField";
 
-const EditStock = () => {
+const Delete = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [selectedSubCategory, setSelectedSubCategory] = useState<string>("");
   const [productList, setProductList] = useState<GroceryInterface[]>([]);
@@ -45,31 +45,34 @@ const EditStock = () => {
     }));
   };
 
-const handleDelete = async () => {
-  setIsSubmitting(true);
+  const handleDelete = async () => {
+    setIsSubmitting(true);
 
-  const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
-    .filter(([, isDelete]) => isDelete === true)
-    .map(([productId]) => Number(productId));
+    const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
+      .filter(([, isDelete]) => isDelete === true)
+      .map(([productId]) => Number(productId));
 
-  try {
-    const res = await axios.post("/api/delete", productIdsToDelete);
-    toast.success(res.data.message);
-    setRerender(!rerender);
-  } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      toast.error(err.response?.data || err.message);
-    } else if (err instanceof Error) {
-      toast.error(err.message);
-    } else {
-      toast.error("An unknown error occurred.");
+    try {
+      const res = await axios.post("/api/delete", productIdsToDelete);
+      toast.success(res.data.message);
+      setRerender(!rerender);
+    } catch (err: unknown) {
+      if (axios.isAxiosError(err)) {
+        const message =
+          (typeof err.response?.data === "string"
+            ? err.response.data
+            : (err.response?.data as any)?.message) || err.message;
+
+        toast.error(message);
+      } else if (err instanceof Error) {
+        toast.error(err.message);
+      } else {
+        toast.error("An unknown error occurred.");
+      }
+    } finally {
+      setIsSubmitting(false);
     }
-  } finally {
-    setIsSubmitting(false);
-  }
-};
-
-
+  };
 
   useEffect(() => {
     if (!selectedSubCategory) return;
@@ -127,9 +130,9 @@ const handleDelete = async () => {
             onChange={handleSubCategoryChange}
             options={
               selectedCategory
-                ? subCategories.map((item) => ({
-                    label: item.subCategory,
-                    value: item.subCategory,
+                ? subCategories.map((subCat) => ({
+                    label: subCat,
+                    value: subCat,
                   }))
                 : []
             }
@@ -219,7 +222,7 @@ const handleDelete = async () => {
 
         <div className="mt-5 flex justify-end mb-5">
           <button
-            onClick={handleDelete}  
+            onClick={handleDelete}
             className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white
          shadow-sm transition-colors duration-200 ease-in-out
          hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400
@@ -234,4 +237,4 @@ const handleDelete = async () => {
   );
 };
 
-export default EditStock;
+export default Delete;

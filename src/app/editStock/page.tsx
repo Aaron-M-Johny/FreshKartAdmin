@@ -8,7 +8,7 @@ import {
   GroceryInterface,
   productStockListInterface,
   productStockObjectInterface,
-} from "@/interfaces/admin/interfaces";
+} from "@/interfaces/interfaces";
 import toast from "react-hot-toast";
 import { SelectField } from "@/components/SelectField";
 
@@ -148,9 +148,9 @@ const EditStock = () => {
             onChange={handleSubCategoryChange}
             options={
               selectedCategory
-                ? subCategories.map((item) => ({
-                    label: item.subCategory,
-                    value: item.subCategory,
+                ? subCategories.map((subCat) => ({
+                    label: subCat,
+                    value: subCat,
                   }))
                 : []
             }
