@@ -46,33 +46,37 @@ const Delete = () => {
   };
 
   const handleDelete = async () => {
-    setIsSubmitting(true);
+  setIsSubmitting(true);
 
-    const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
-      .filter(([, isDelete]) => isDelete === true)
-      .map(([productId]) => Number(productId));
+  const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
+    .filter(([, isDelete]) => isDelete === true)
+    .map(([productId]) => Number(productId));
 
-    try {
-      const res = await axios.post("/api/delete", productIdsToDelete);
-      toast.success(res.data.message);
-      setRerender(!rerender);
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err)) {
-        const message =
-          (typeof err.response?.data === "string"
-            ? err.response.data
-            : (err.response?.data as any)?.message) || err.message;
+  try {
+    const res = await axios.post("/api/delete", productIdsToDelete);
+    toast.success(res.data.message);
+    setRerender(!rerender);
+  } catch (err: unknown) {
+    if (axios.isAxiosError(err)) {
+      type ErrorResponse = { message?: string };
+      const errorData = err.response?.data as ErrorResponse | string | undefined;
 
-        toast.error(message);
-      } else if (err instanceof Error) {
-        toast.error(err.message);
-      } else {
-        toast.error("An unknown error occurred.");
-      }
-    } finally {
-      setIsSubmitting(false);
+      const message =
+        typeof errorData === "string"
+          ? errorData
+          : errorData?.message || err.message;
+
+      toast.error(message);
+    } else if (err instanceof Error) {
+      toast.error(err.message);
+    } else {
+      toast.error("An unknown error occurred.");
     }
-  };
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   useEffect(() => {
     if (!selectedSubCategory) return;
