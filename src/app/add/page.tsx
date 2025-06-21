@@ -8,14 +8,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ProductFormData } from "@/interfaces/interfaces";
 
-type FormState = {
-  success: boolean;
-  message: string;
-};
-
 const AddProductForm = () => {
-  const [preview, setPreview] = useState(false);
-  const [isSubmiting, setIsSubmiting] = useState(false);
+  const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<ProductFormData>({
     ProductName: "",
@@ -34,14 +28,10 @@ const AddProductForm = () => {
     setIsSubmiting(true);
 
     const {
-      ProductName,
-      Brand,
       Price,
       DiscountPrice,
       Stock,
-      Quantity,
       Image_Url,
-      Category,
       SubCategory,
     } = formData;
 

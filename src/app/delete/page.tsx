@@ -49,7 +49,7 @@ const handleDelete = async () => {
   setIsSubmitting(true);
 
   const productIdsToDelete: number[] = Object.entries(updatedDeleteObject)
-    .filter(([_, isDelete]) => isDelete === true)
+    .filter(([, isDelete]) => isDelete === true)
     .map(([productId]) => Number(productId));
 
   try {

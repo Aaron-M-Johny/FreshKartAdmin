@@ -10,11 +10,10 @@ import { SelectFieldProps } from "@/interfaces/interfaces";
 export const SelectField: React.FC<SelectFieldProps> = ({
   id,
   label,
-  name, // not directly used in shadcn Select
+  name, 
   options,
   value,
   onChange,
-  required = true, // not used directly, you can handle validation externally
   disabled = false,
   placeholder = "Select an option",
   className = "",
