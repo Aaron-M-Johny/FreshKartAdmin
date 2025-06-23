@@ -64,8 +64,8 @@ const Categories: React.FC<CategoriesProps> = ({
         options={
           selectedCategory
             ? subCategories.map((item) => ({
-                label: item.subCategory,
-                value: item.subCategory,
+                label: item,
+                value: item,
               }))
             : []
         }

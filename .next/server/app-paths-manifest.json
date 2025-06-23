@@ -1,9 +1,4 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/add/page": "app/add/page.js",
   "/api/groceriesList/route": "app/api/groceriesList/route.js",
-  "/api/manageStock/route": "app/api/manageStock/route.js",
-  "/delete/page": "app/delete/page.js",
-  "/editStock/page": "app/editStock/page.js",
-  "/modify/page": "app/modify/page.js"
+  "/editStock/page": "app/editStock/page.js"
 }
