@@ -5,6 +5,17 @@ import { Toaster } from "@/components/ui/sonner";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { SiteHeader } from "@/components/site-header";
 
+export const metadata = {
+  title: 'Groskart Admin',
+  description: 'Manage Groskart',
+  icons: {
+    icon: [
+      { url: '/icons/icon-light.png', media: '(prefers-color-scheme: light)' },
+      { url: '/icons/icon-dark.png', media: '(prefers-color-scheme: dark)' },
+    ],
+  },
+};
+
 export default function RootLayout({
   children,
 }: {

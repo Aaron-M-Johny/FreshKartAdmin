@@ -1,4 +1,5 @@
 {
+  "/_not-found/page": "app/_not-found/page.js",
   "/api/groceriesList/route": "app/api/groceriesList/route.js",
   "/editStock/page": "app/editStock/page.js"
 }
