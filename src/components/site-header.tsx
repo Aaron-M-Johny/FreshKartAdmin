@@ -9,8 +9,9 @@ export function SiteHeader() {
   const pathname = usePathname();
   const titles: Record<string, string> = {
     "/add": "Add New Product",
-    "/delete": "Delete a Product",
+    "/delete": "Delete Products",
     "/editStock": "Manage Stocks",
+    "/modify": "Modify Product Details"
   };
 
   const heading = pathname in titles ? titles[pathname] : "Dashboard";

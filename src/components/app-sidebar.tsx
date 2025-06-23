@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import * as React from "react"
+import * as React from "react";
 
 import {
   Sidebar,
@@ -14,8 +14,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { NavUser } from "./nav-user"
+} from "@/components/ui/sidebar";
+import { NavUser } from "./nav-user";
 
 const data = {
   navMain: [
@@ -25,7 +25,6 @@ const data = {
     },
     {
       title: "Manage Products",
-      url: "#",
       items: [
         {
           title: "Add new Products",
@@ -38,7 +37,6 @@ const data = {
         {
           title: "Manage Stock",
           url: "/editStock",
-          isActive: true,
         },
         {
           title: "Delete Product",
@@ -48,7 +46,6 @@ const data = {
     },
     {
       title: "User Orders",
-      url: "#",
       items: [
         {
           title: "All Orders",
@@ -74,7 +71,6 @@ const data = {
     },
     {
       title: "Promotions",
-      url: "#",
       items: [
         {
           title: "Coupons",
@@ -87,7 +83,7 @@ const data = {
       ],
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const pathname = usePathname();
@@ -98,8 +94,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <a href="#">
-                <img src="/logo/logo-dark.png" alt="" className="hidden dark:block w-[60%]"/>
-                <img src="/logo/logo.png" alt="" className="dark:hidden block w-[60%]"/>
+                <img
+                  src="/logo/logo-dark.png"
+                  alt=""
+                  className="hidden dark:block w-[60%]"
+                />
+                <img
+                  src="/logo/logo.png"
+                  alt=""
+                  className="dark:hidden block w-[60%]"
+                />
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -110,16 +114,23 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild>
-                  <a href={item.url} className="font-medium">
-                    {item.title}
-                  </a>
+                <SidebarMenuButton asChild isActive={pathname == item.url}>
+                  {item.url ? (
+                    <a href={item.url} className="font-medium">
+                      {item.title}
+                    </a>
+                  ) : (
+                    <div>{item.title}</div>
+                  )}
                 </SidebarMenuButton>
                 {item.items?.length ? (
                   <SidebarMenuSub>
                     {item.items.map((item) => (
                       <SidebarMenuSubItem key={item.title}>
-                        <SidebarMenuSubButton asChild isActive={pathname==item.url}>
+                        <SidebarMenuSubButton
+                          asChild
+                          isActive={pathname == item.url}
+                        >
                           <a href={item.url}>{item.title}</a>
                         </SidebarMenuSubButton>
                       </SidebarMenuSubItem>
@@ -132,7 +143,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarGroup>
       </SidebarContent>
       <SidebarRail />
-      <NavUser user={{ name: "Admin", email: "admin@grockart.store", avatar: "https://api.iconify.design/material-symbols:account-circle.svg"} } />
+      <NavUser
+        user={{
+          name: "Admin",
+          email: "admin@grockart.store",
+          avatar:
+            "https://api.iconify.design/material-symbols:account-circle.svg",
+        }}
+      />
     </Sidebar>
-  )
+  );
 }

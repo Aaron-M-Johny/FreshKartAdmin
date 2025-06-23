@@ -10,6 +10,7 @@ import { ProductFormData } from "@/interfaces/interfaces";
 
 const AddProductForm = () => {
   const [isSubmiting, setIsSubmiting] = useState<boolean>(false);
+  const [cart, setCart] = useState<number>(0)
 
   const [formData, setFormData] = useState<ProductFormData>({
     ProductName: "",
@@ -130,10 +131,10 @@ const AddProductForm = () => {
 
   return (
     <>
-      <section className="mx-auto xl:w-[80%] md:w-[95%] px-4 py-12">
+      <section className="mx-auto w-full xl:w-[80%] md:w-[95%] px-4 py-12">
         <div className="flex flex-col xl:flex-row gap-6">
           {/* Add Product Form */}
-          <div className="rounded-2xl border shadow-sm w-full p-6">
+          <div className="rounded-2xl border shadow-sm w-full md:w-1/2 p-6">
             <h3 className="text-2xl font-semibold mb-6 border-b pb-3">
               New Product Form
             </h3>
@@ -269,7 +270,7 @@ const AddProductForm = () => {
           </div>
 
           {/* Product Preview */}
-          <div className=" relative rounded-2xl border shadow-sm w-full lg:w-1/2 p-6">
+          <div className=" relative rounded-2xl border shadow-sm w-full md:w-1/2 p-6">
             <h3 className="text-2xl font-semibold mb-6 border-b  pb-3">
               Live Preview
             </h3>
@@ -368,12 +369,12 @@ const AddProductForm = () => {
                       )}
                     </div>
 
-                    <button
+                    {cart>0 ? <div className="w-full bg-[#2582AA] text-white text-[10px] sm:text-sm font-medium py-1 rounded-lg transition flex justify-around items-center"><button onClick={()=>setCart(prev=>prev-1)}>-</button><p>{cart}</p><button onClick={()=>setCart(prev=>prev+1)}>+</button></div>:<button
                       className="w-full bg-[#2582AA] text-white text-[10px] sm:text-sm font-medium py-1 rounded-lg transition"
-                      onClick={() => toast.info("Cart logic not implemented")}
+                      onClick={() => setCart(1)}
                     >
                       Add to Cart
-                    </button>
+                    </button>}
                   </div>
                 </div>
               </div>

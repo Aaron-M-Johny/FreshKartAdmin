@@ -9,8 +9,18 @@ import {
   productStockListInterface,
   productStockObjectInterface,
 } from "@/interfaces/interfaces";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHead,
+  TableCell,
+} from "@/components/ui/table";
 import { SelectField } from "@/components/SelectField";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const EditStock = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -124,10 +134,8 @@ const EditStock = () => {
     : [];
 
   return (
-    <>
-      <h3 className="p-10 text-4xl font-bold">Manage Stocks</h3>
-
-      <section className="px-10">
+    <section className="flex flex-1 flex-col gap-4 py-4 md:gap-6 md:py-6 @container/main">
+      <div className="bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm @container/card mx-4 lg:mx-6 px-10">
         <p className="mb-3">Select category to proceed:</p>
         <div className="flex gap-10 mb-5">
           <SelectField
@@ -149,8 +157,8 @@ const EditStock = () => {
             options={
               selectedCategory
                 ? subCategories.map((item) => ({
-                    label: item.subCategory,
-                    value: item.subCategory,
+                    label: item,
+                    value: item,
                   }))
                 : []
             }
@@ -159,42 +167,38 @@ const EditStock = () => {
             title={!selectedCategory ? "Select category first" : ""}
           />
         </div>
-        <div className="rounded-md border border-green-200 ">
-          <table className="min-w-full text-sm text-left text-green-900">
-            <thead className="bg-green-100 text-green-800">
-              <tr>
-                <th className="px-4 py-2 font-semibold text-center">Image</th>
-                <th className="px-4 py-2 font-semibold">Product</th>
-                <th className="px-4 py-2 font-semibold text-center">
-                  Quantity
-                </th>
-                <th className="px-4 py-2 font-semibold text-center">Price</th>
-                <th className="px-4 py-2 font-semibold text-center">
-                  Stock Left
-                </th>
-              </tr>
-            </thead>
-            {productList.length > 0 ? (
-              <tbody>
-                {productList.map((item) => (
-                  <tr
-                    key={item.ProductId}
-                    className="border-t border-green-100"
-                  >
-                    <td className="px-4 py-2 text-center">
+        <div className="w-full overflow-x-auto rounded-md border">
+          <Table className="min-w-[800px]">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="text-center">Image</TableHead>
+                <TableHead>Product</TableHead>
+                <TableHead className="text-center">Quantity</TableHead>
+                <TableHead className="text-center">Price</TableHead>
+                <TableHead className="text-center">Stock Left</TableHead>
+              </TableRow>
+            </TableHeader>
+
+            <TableBody>
+              {productList.length > 0 ? (
+                productList.map((item) => (
+                  <TableRow key={item.ProductId}>
+                    <TableCell className="text-center">
                       <Image
                         src={item.Image_Url}
                         alt="Product"
-                        height={80}
                         width={80}
-                        className="mx-auto rounded bg-white"
+                        height={80}
+                        className="mx-auto rounded bg-white object-cover"
                       />
-                    </td>
-                    <td className="px-4 py-2 max-w-md">
+                    </TableCell>
+                    <TableCell>
                       {item.Brand} {item.ProductName}
-                    </td>
-                    <td className="px-4 py-2 text-center">{item.Quantity}</td>
-                    <td className="px-4 py-2 text-center text-base font-bold text-green-600">
+                    </TableCell>
+                    <TableCell className="text-center">
+                      {item.Quantity}
+                    </TableCell>
+                    <TableCell className="text-center font-bold">
                       {item.DiscountPrice &&
                       item.Price &&
                       item.DiscountPrice < item.Price ? (
@@ -207,61 +211,60 @@ const EditStock = () => {
                       ) : (
                         `$${item.DiscountPrice || item.Price || 0}`
                       )}
-                    </td>
-                    <td className="px-4 py-2 text-center">
-                      <div className="inline-flex items-center gap-2">
-                        <button
-                          className="w-8 h-8 rounded bg-amber-300"
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <div className="flex items-center gap-2">
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          className="w-8 h-8"
                           onClick={() => handleDecrement(item.ProductId)}
                         >
                           -
-                        </button>
-                        <input
+                        </Button>
+
+                        <Input
                           type="number"
-                          className="w-12 h-8 text-center border border-green-300 rounded"
-                          value={updatedStockObject[item.ProductId]}
+                          className="w-14 h-8 text-center"
+                          value={
+                            updatedStockObject[item.ProductId] ?? item.Stock
+                          }
                           onChange={(e) => changeStock(e, item.ProductId)}
                         />
-                        <button
-                          className="w-8 h-8 rounded bg-amber-300"
+
+                        <Button
+                          variant="secondary"
+                          size="icon"
+                          className="w-8 h-8"
                           onClick={() => handleIncrement(item.ProductId)}
                         >
                           +
-                        </button>
+                        </Button>
                       </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            ) : (
-              <tbody>
-                <tr>
-                  <td
-                    colSpan={6}
-                    className="px-4 py-6 text-center text-gray-400"
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={5}
+                    className="py-6 text-center text-gray-400"
                   >
                     Select category to proceed
-                  </td>
-                </tr>
-              </tbody>
-            )}
-          </table>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </div>
 
         <div className="mt-5 flex justify-end mb-5">
-          <button
-            onClick={handleSubmit}
-            className="rounded-lg bg-blue-600 px-4 py-2 font-medium text-white
-         shadow-sm transition-colors duration-200 ease-in-out
-         hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400
-         disabled:cursor-not-allowed disabled:bg-blue-300"
-            disabled={!productList.length}
-          >
+          <Button onClick={handleSubmit} disabled={!productList.length}>
             {isSubmitting ? "Updating..." : "Update"}
-          </button>
+          </Button>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 };
 

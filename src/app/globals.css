@@ -14,12 +14,12 @@
     --border-color-main: #b9fbc0;
     --border-color: #c1dacb;
     --border-focus-color: #268033;
-    --button-bg-color-primary:#268033;
-    --button-bg-color-secondary:#DBFCE6;
-    --button-bg-color-hover-primary:#21742E;
-    --button-bg-color-hover-secondary:#C7E5D1;
-    --button-text-color-primary:#EFFCF3;
-    --button-text-color-secondary:#16532A;
+    --button-bg-color-primary: #268033;
+    --button-bg-color-secondary: #dbfce6;
+    --button-bg-color-hover-primary: #21742e;
+    --button-bg-color-hover-secondary: #c7e5d1;
+    --button-text-color-primary: #effcf3;
+    --button-text-color-secondary: #16532a;
   }
 
   [data-theme="dark"] {
@@ -29,7 +29,6 @@
     --bg-color-menu-hovered: #4b5563;
     --bg-color-menu-selected: #9ca3af;
     --font-color: #f9fafb;
-
   }
 }
 
@@ -62,6 +61,17 @@ select {
   color: var(--foreground) !important;
   background-color: var(--background) !important;
   -webkit-text-fill-color: var(--foreground) !important;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
 
 input::placeholder,
@@ -162,7 +172,6 @@ textarea::placeholder {
 
   /* ✅ Overridden: Sidebar Ring */
   --sidebar-ring: var(--color-lime-400);
-
 }
 
 .dark {
@@ -199,7 +208,6 @@ textarea::placeholder {
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -208,4 +216,3 @@ textarea::placeholder {
     @apply bg-background text-foreground;
   }
 }
-
