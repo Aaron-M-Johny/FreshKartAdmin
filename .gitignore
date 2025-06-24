@@ -1,1 +1,23 @@
-node_modules
+# Build
+.next/
+out/
+
+# Env
+.env
+.env.*  # Covers .env.local, .env.production etc.
+
+# OS files
+.DS_Store
+
+# Node
+node_modules/
+
+# Logs
+*.log
+
+# Editor folders
+.vscode/
+.idea/
+
+# Coverage
+coverage/
